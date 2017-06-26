@@ -1,11 +1,24 @@
 package fr.eni.ecole.jbabinot.android.tp.lokacar.Model;
 
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.structure.BaseModel;
+
+import java.util.UUID;
+
+import fr.eni.ecole.jbabinot.android.tp.lokacar.AppDatabase;
+
 /**
- * Created by amercier2016 on 26/06/2017.
+ * Created by jbabinot2015 on 26/06/2017.
  */
 
-public class Region {
+@Table(database = AppDatabase.class)
+public class Region extends BaseModel {
+        @Column
+        @PrimaryKey(autoincrement = true)
+        public int id;
 
-    public int id;
-    public String name;
+        @Column
+        public String nom;
 }

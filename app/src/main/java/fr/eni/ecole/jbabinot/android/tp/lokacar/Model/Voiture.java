@@ -2,30 +2,33 @@ package fr.eni.ecole.jbabinot.android.tp.lokacar.Model;
 
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.ForeignKey;
-import com.raizlabs.android.dbflow.annotation.ForeignKeyReference;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
-import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.structure.BaseModel;
-
-import fr.eni.ecole.jbabinot.android.tp.lokacar.AppDatabase;
+import com.raizlabs.android.dbflow.structure.Model;
 
 /**
  * Created by jbabinot2015 on 26/06/2017.
  */
 
-@Table(database = AppDatabase.class)
-public class Agence extends BaseModel {
+public class Voiture extends BaseModel {
     @Column
-    @PrimaryKey(autoincrement = true)
-    public int id;
+    @PrimaryKey
+    public String immatriculation;
 
     @Column
-    public String nom;
+    public double prix;
 
     @Column
-    public double ca;
+    public int annee;
+
+    @Column
+    public int km;
 
     @Column
     @ForeignKey
-    public Region region;
+    public Modele modele;
+
+    @Column
+    @ForeignKey
+    public Agence agence;
 }

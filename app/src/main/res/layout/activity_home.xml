@@ -5,11 +5,47 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="fr.eni.ecole.jbabinot.android.tp.lokacar.HomeActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="32dp">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lokacar"
+            android:textSize="20sp"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_directions_car_black_48dp"
+                />
+        </RelativeLayout>
+    </LinearLayout>
 
+    <Spinner
+        android:layout_margin="32dp"
+        android:id="@+id/spinnerRegion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></Spinner>
+
+    <Spinner
+        android:layout_margin="32dp"
+        android:id="@+id/spinnerAgence"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></Spinner>
+
+    <Button
+        android:layout_margin="32dp"
+        android:id="@+id/buttonSubmit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/home_btn_submit"/>
 </LinearLayout>
