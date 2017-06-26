@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Lokacar</string>
+    <string name="home_btn_submit">Accéder à mon agence</string>
 </resources>
