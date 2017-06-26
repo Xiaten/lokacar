@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Lokacar</string>
     <string name="home_btn_submit">Accéder à mon agence</string>
+    <string name="title_activity_list">ListActivity</string>
+    <string name="list_title">Liste des véhicules</string>
+    <string name="list_item_unit">€/jour</string>
 </resources>
