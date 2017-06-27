@@ -31,6 +31,8 @@ public class HomeActivity extends AppCompatActivity {
 
     private ArrayAdapter adapterRegion;
     private ArrayAdapter adapterAgence;
+    private Spinner spinnerRegion;
+    private Spinner spinnerAgence;
 
 
     @Override
@@ -40,6 +42,15 @@ public class HomeActivity extends AppCompatActivity {
         // chargement BDD
         DaoUtil.insertData();
 
+        // affichage de l'agence
+//        int id = Preference.getIdAgence(HomeActivity.this);
+//        if (id != -1){
+//            Agence agence = new Agence();
+//            spinnerAgence = (Spinner) findViewById(R.id.spinnerAgence);
+//            spinnerAgence.setSelection();
+//        }
+
+
         // chargement list region et agence en fonction de la sélection region
         listRegion();
 
@@ -47,24 +58,24 @@ public class HomeActivity extends AppCompatActivity {
 
     public void listRegion(){
         final List<Region> listRegion = SQLite.select().from(Region.class).orderBy(Region_Table.nom, true).queryList();
-        Spinner spinner = (Spinner) findViewById(R.id.spinnerRegion);
+        spinnerRegion = (Spinner) findViewById(R.id.spinnerRegion);
         adapterRegion = new RegionAdapter(HomeActivity.this, R.layout.item_region, listRegion);
         adapterRegion.setDropDownViewResource(R.layout.item_region);
-        spinner.setAdapter(adapterRegion);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinnerRegion.setAdapter(adapterRegion);
+        spinnerRegion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 int regionId = listRegion.get(i).id;
                 final List<Agence> listAgence = AgenceDao.getListByRegion(regionId);
-                Spinner spinnerAgence = (Spinner) findViewById(R.id.spinnerAgence);
+                spinnerAgence = (Spinner) findViewById(R.id.spinnerAgence);
                 adapterAgence = new AgenceAdapter(HomeActivity.this, R.layout.item_agence, listAgence);
                 adapterAgence.setDropDownViewResource(R.layout.item_agence);
                 spinnerAgence.setAdapter(adapterAgence);
                 spinnerAgence.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                        int aganceId = listAgence.get(i).id;
-                        Preference.setIdAgence(HomeActivity.this, aganceId);
+                        int agenceId = listAgence.get(i).id;
+                        Preference.setIdAgence(HomeActivity.this, agenceId);
                     }
 
                     @Override

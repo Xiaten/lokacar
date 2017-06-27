@@ -25,4 +25,11 @@ public class AgenceDao {
         list = SQLite.select().from(Agence.class).where(Agence_Table.region_id.is(regionId)).queryList();
         return list;
     }
+
+    public static Agence get(int agenceId){
+        return SQLite.select()
+                .from(Agence.class)
+                .where(Agence_Table.id.eq(agenceId))
+                .querySingle();
+    }
 }
