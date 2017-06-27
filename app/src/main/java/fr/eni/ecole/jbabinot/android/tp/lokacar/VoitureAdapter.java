@@ -14,6 +14,7 @@ import java.lang.reflect.Array;
 import java.util.List;
 import java.util.zip.Inflater;
 
+import fr.eni.ecole.jbabinot.android.tp.lokacar.DAO.VoitureDao;
 import fr.eni.ecole.jbabinot.android.tp.lokacar.Model.Voiture;
 
 /**
@@ -54,6 +55,7 @@ public class VoitureAdapter extends ArrayAdapter<Voiture> {
         viewHolder.textViewMarque.setText(item.modele.marque.nom);
         viewHolder.textViewModele.setText(item.modele.nom);
         viewHolder.textViewPrix.setText(String.valueOf(item.prix));
+        viewHolder.textViewEtat.setText(VoitureDao.isLoue(item.immatriculation)?"Loué":"Disponible");
 
         return convertView;
     }

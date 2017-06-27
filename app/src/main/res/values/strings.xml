@@ -18,4 +18,8 @@
     <string name="details_prix">Prix :</string>
     <string name="details_unit">€</string>
     <string name="add_client_title">Nouveau client</string>
+    <string name="details_state_loue">Loué</string>
+    <string name="details_state_dispo">Disponible</string>
+    <string name="details_button_retour">Retour</string>
+    <string name="details_button_location">Location</string>
 </resources>
