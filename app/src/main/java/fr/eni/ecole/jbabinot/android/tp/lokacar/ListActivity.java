@@ -9,9 +9,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.ecole.jbabinot.android.tp.lokacar.DAO.VoitureDao;
@@ -20,7 +22,7 @@ import fr.eni.ecole.jbabinot.android.tp.lokacar.Model.Voiture;
 public class ListActivity extends AppCompatActivity {
 
     private ListView listViewVehicules;
-
+    private List<Voiture> listVoiture;
     private ArrayAdapter adapter;
 
     @Override
@@ -28,19 +30,26 @@ public class ListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
         listViewVehicules = (ListView) findViewById(R.id.listViewVehicules);
-
-        adapter = new VoitureAdapter(ListActivity.this, R.layout.list_item, VoitureDao.getAll());
-        listViewVehicules.setAdapter(adapter);
-        listViewVehicules.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                if (adapter.getItem(position) != null) {
-                    Intent intent = new Intent(ListActivity.this, DetailsActivity.class);
-                    intent.putExtra("id", ((Voiture)adapter.getItem(position)).immatriculation);
-                    startActivity(intent);
-                }
+        int agenceId = (int) getIntent().getExtras().get("id");
+        if (agenceId != -1) {
+            listVoiture = VoitureDao.getByAgence(agenceId);
+            if (!listVoiture.isEmpty()){
+                adapter = new VoitureAdapter(ListActivity.this, R.layout.list_item, listVoiture);
+                listViewVehicules.setAdapter(adapter);
+                listViewVehicules.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                    if (adapter.getItem(position) != null) {
+                        Intent intent = new Intent(ListActivity.this, DetailsActivity.class);
+                        intent.putExtra("id", ((Voiture)adapter.getItem(position)).immatriculation);
+                        startActivity(intent);
+                    }
+                    }
+                });
+            }else {
+                Toast.makeText(ListActivity.this, getString(R.string.list_error_no_voiture), Toast.LENGTH_LONG).show();
             }
-        });
+        }
     }
 
     @Override

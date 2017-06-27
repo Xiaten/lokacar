@@ -42,4 +42,8 @@ public class VoitureDao{
         }
         return loue;
     }
+
+     public static List<Voiture> getByAgence(int idAgence){
+        return SQLite.select().from(Voiture.class).where(Voiture_Table.agence_id.is(idAgence)).queryList();
+    }
 }

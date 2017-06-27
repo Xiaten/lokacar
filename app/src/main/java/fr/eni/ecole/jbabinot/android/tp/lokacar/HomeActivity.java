@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 
@@ -33,7 +34,7 @@ public class HomeActivity extends AppCompatActivity {
     private ArrayAdapter adapterAgence;
     private Spinner spinnerRegion;
     private Spinner spinnerAgence;
-
+    private int idAgenceSelected = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,18 +43,8 @@ public class HomeActivity extends AppCompatActivity {
         // chargement BDD
         DaoUtil.insertData();
 
-        // affichage de l'agence
-//        int id = Preference.getIdAgence(HomeActivity.this);
-//        if (id != -1){
-//            Agence agence = new Agence();
-//            spinnerAgence = (Spinner) findViewById(R.id.spinnerAgence);
-//            spinnerAgence.setSelection();
-//        }
-
-
         // chargement list region et agence en fonction de la sélection region
         listRegion();
-
     }
 
     public void listRegion(){
@@ -74,8 +65,8 @@ public class HomeActivity extends AppCompatActivity {
                 spinnerAgence.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                        int agenceId = listAgence.get(i).id;
-                        Preference.setIdAgence(HomeActivity.this, agenceId);
+                        idAgenceSelected = listAgence.get(i).id;
+                        Preference.setIdAgence(HomeActivity.this, idAgenceSelected);
                     }
 
                     @Override
@@ -93,7 +84,23 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void toList(View view){
-        Intent intent = new Intent(HomeActivity.this, ListActivity.class);
-        startActivity(intent);
+        //Assert
+        boolean error = false;
+        spinnerRegion = (Spinner) findViewById(R.id.spinnerRegion);
+        spinnerAgence = (Spinner) findViewById(R.id.spinnerAgence);
+        if (spinnerRegion.getSelectedItem() == null){
+            Toast.makeText(HomeActivity.this, getString(R.string.main_error_region), Toast.LENGTH_LONG).show();
+            error = true;
+        }
+        if (spinnerAgence.getSelectedItem() == null){
+            Toast.makeText(HomeActivity.this, R.string.main_error_agence, Toast.LENGTH_LONG).show();
+            error = true;
+        }
+
+        if (!error){
+            Intent intent = new Intent(HomeActivity.this, ListActivity.class);
+            intent.putExtra("id", idAgenceSelected);
+            startActivity(intent);
+        }
     }
 }

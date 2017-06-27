@@ -22,4 +22,7 @@
     <string name="details_state_dispo">Disponible</string>
     <string name="details_button_retour">Retour</string>
     <string name="details_button_location">Location</string>
+    <string name="main_error_region">Vous devez sélectionner une région</string>
+    <string name="main_error_agence">Vous devez sélectionner une agence</string>
+    <string name="list_error_no_voiture">Il n\'y a pas de voiture pour cette agence</string>
 </resources>
