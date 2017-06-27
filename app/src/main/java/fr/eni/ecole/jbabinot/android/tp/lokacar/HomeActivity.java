@@ -1,7 +1,9 @@
 package fr.eni.ecole.jbabinot.android.tp.lokacar;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -203,5 +205,10 @@ public class HomeActivity extends AppCompatActivity {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+    }
+
+    public void toList(View view){
+        Intent intent = new Intent(HomeActivity.this, ListActivity.class);
+        startActivity(intent);
     }
 }

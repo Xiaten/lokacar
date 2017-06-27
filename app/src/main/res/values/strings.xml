@@ -4,4 +4,18 @@
     <string name="title_activity_list">ListActivity</string>
     <string name="list_title">Liste des véhicules</string>
     <string name="list_item_unit">€/jour</string>
+    <string name="filter_loues">Véhicules loués</string>
+    <string name="filter_dispo">Véhicules disponibles</string>
+    <string name="action_search">Rechercher</string>
+    <string name="action_about">A propos de...</string>
+    <string name="details_title">Détails du véhicule</string>
+    <string name="add_car_title">Ajout d\'un véhicule</string>
+    <string name="details_marque">Marque : </string>
+    <string name="details_modele">Modèle : </string>
+    <string name="details_annee">Année : </string>
+    <string name="details_km">Kilomètres : </string>
+    <string name="details_immatriculation">Immatriculation : </string>
+    <string name="details_prix">Prix :</string>
+    <string name="details_unit">€</string>
+    <string name="add_client_title">Nouveau client</string>
 </resources>
