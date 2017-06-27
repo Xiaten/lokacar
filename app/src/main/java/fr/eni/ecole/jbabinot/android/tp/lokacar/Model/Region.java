@@ -21,4 +21,11 @@ public class Region extends BaseModel {
 
         @Column
         public String nom;
+
+        public Region() {
+        }
+
+        public Region(String nom) {
+                this.nom = nom;
+        }
 }

@@ -28,4 +28,12 @@ public class Agence extends BaseModel {
     @Column
     @ForeignKey
     public Region region;
+
+    public Agence() {
+    }
+
+    public Agence(String nom, Region region) {
+        this.nom = nom;
+        this.region = region;
+    }
 }
