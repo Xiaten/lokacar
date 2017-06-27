@@ -12,6 +12,7 @@ import fr.eni.ecole.jbabinot.android.tp.lokacar.Model.Client;
 import fr.eni.ecole.jbabinot.android.tp.lokacar.Model.Location;
 import fr.eni.ecole.jbabinot.android.tp.lokacar.Model.Marque;
 import fr.eni.ecole.jbabinot.android.tp.lokacar.Model.Modele;
+import fr.eni.ecole.jbabinot.android.tp.lokacar.Model.Photo;
 import fr.eni.ecole.jbabinot.android.tp.lokacar.Model.Region;
 import fr.eni.ecole.jbabinot.android.tp.lokacar.Model.Voiture;
 
@@ -179,6 +180,31 @@ public class DaoUtil {
             Voiture voiture22 = new Voiture("dz-123-zd", 79, 2016, 23500, modele1, agence2); voiture22.save();
             Voiture voiture23 = new Voiture("da-123-ad", 79, 2016, 24000, modele2, agence2); voiture23.save();
             Voiture voiture24 = new Voiture("db-123-bd", 79, 2016, 24000, modele3, agence2); voiture24.save();
+
+            Photo photo1 = new Photo("https://img.autoplus.fr/picture/volkswagen/touran/1491498/Volkswagen_Touran_2015_bc999-raw.jpg", voiture1); photo1.save();
+            Photo photo2 = new Photo("http://www.voiturepourlui.com/images/Renault/Espace-2015/Exterieur/Renault_Espace_2015_001.jpg", voiture2); photo2.save();
+            Photo photo3 = new Photo("http://www.largus.fr/images/images/txt_opel-zafira-restyle-2016-02.jpg", voiture3); photo3.save();
+            Photo photo4 = new Photo("http://img.turbo.fr/05282406-photo-renault-clio-4-les-images-du-catalogue-de-personnalisation.jpg", voiture4); photo4.save();
+            Photo photo5 = new Photo("http://www.largus.fr/images/images/citroen-c3-picasso-2-II-vue-avant-largus-.jpg", voiture5); photo5.save();
+            Photo photo6 = new Photo("http://voiture.kidioui.fr/blog/wp-content/uploads/2012/02/Golf-electrique.bmp", voiture6); photo6.save();
+            Photo photo7 = new Photo("https://response.jp/imgs/thumb_h2/1077798.jpg", voiture7); photo7.save();
+            Photo photo8 = new Photo("http://img4.autodeclics.com/photo_article/64973/2491/1200-L-volkswagen-polo-voiture-mondiale-de-l-annee.jpg", voiture8); photo8.save();
+            Photo photo9 = new Photo("http://media.citroen.fr/image/41/4/0mm00n9b-1cb1b5kzz5zzzz1z-0pilzzzz-001-01.10414.10414.png", voiture9); photo9.save();
+            Photo photo10 = new Photo("http://cdn2.autoexpress.co.uk/sites/autoexpressuk/files/styles/gallery_adv/public/8/80//renault-laguna.jpg?itok=lXtxzDPR", voiture10); photo10.save();
+            Photo photo11 = new Photo("http://media.citroen.fr/image/80/5/citroen-c5.6805.png", voiture11); photo11.save();
+            Photo photo12 = new Photo("https://images.caradisiac.com/logos-ref/gamme/gamme--volkswagen-passat/S7-gamme--volkswagen-passat.jpg", voiture12); photo12.save();
+            Photo photo13 = new Photo("http://voiture.kidioui.fr/image/img-auto/opel-tigra-twintop.jpg", voiture13); photo13.save();
+            Photo photo14 = new Photo("http://car--reviews.com/images/peugeot-206-cc/peugeot-206-cc-15.jpg", voiture14); photo14.save();
+            Photo photo15 = new Photo("https://i.ytimg.com/vi/bOGzL2ancio/maxresdefault.jpg", voiture15); photo15.save();
+            Photo photo16 = new Photo("http://www.largus.fr/images/images/2016-ford-kuga-gris-fonce-1.jpg", voiture16); photo16.save();
+            Photo photo17 = new Photo("http://st.motortrend.com/uploads/sites/10/2016/03/2017-Kia-Sportage-EX-front-three-quarter-in-motion-01.jpg", voiture17); photo17.save();
+            Photo photo18 = new Photo("https://www.nissan-cdn.net/content/dam/Nissan/nissan_europe/vehicles/juke/f15/version/versions_and_specs/grade_packshot_juke_nismo-rs_white.png.ximg.l_12_m.smart.png", voiture18); photo18.save();
+            Photo photo19 = new Photo("https://images.caradisiac.com/logos/7/6/1/3/187613/S7-Le-Dacia-Duster-gagne-un-bloc-essence-Euro-6-115-chevaux-104342.jpg", voiture19); photo19.save();
+            Photo photo20 = new Photo("https://images.caradisiac.com/images/2/5/1/3/112513/S0-essai-audi-q5-2017-395466.jpg", voiture20); photo20.save();
+            Photo photo21 = new Photo("https://www.sixt.fr/fileadmin/_processed_/csm_mercedes_ml_a003a9f8ee.png", voiture21); photo21.save();
+            Photo photo22 = new Photo("https://img.autoplus.fr/picture/volkswagen/touran/1491498/Volkswagen_Touran_2015_bc999-raw.jpg", voiture22); photo22.save();
+            Photo photo23 = new Photo("http://www.voiturepourlui.com/images/Renault/Espace-2015/Exterieur/Renault_Espace_2015_001.jpg", voiture23); photo23.save();
+            Photo photo24 = new Photo("http://www.largus.fr/images/images/txt_opel-zafira-restyle-2016-02.jpg", voiture24); photo24.save();
 
             Client client1 = new Client("Durand", "Emma", "edurand@truc.fr", "0123456789"); client1.save();
             Client client2 = new Client("Dupond", "Gabriel", "gdupond@truc.fr", "9874563210"); client2.save();
