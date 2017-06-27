@@ -46,7 +46,4 @@ public class Voiture extends BaseModel {
         this.modele = modele;
         this.agence = agence;
     }
-
-    @Column
-    public boolean loue;
 }

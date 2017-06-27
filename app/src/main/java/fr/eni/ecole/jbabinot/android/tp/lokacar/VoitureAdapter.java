@@ -54,7 +54,6 @@ public class VoitureAdapter extends ArrayAdapter<Voiture> {
         viewHolder.textViewMarque.setText(item.modele.marque.nom);
         viewHolder.textViewModele.setText(item.modele.nom);
         viewHolder.textViewPrix.setText(String.valueOf(item.prix));
-        viewHolder.textViewEtat.setText(item.loue?"Loué":"Disponible");
 
         return convertView;
     }
