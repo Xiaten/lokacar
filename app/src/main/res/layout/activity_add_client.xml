@@ -37,8 +37,10 @@
             android:hint="Email"/>
     </LinearLayout>
     <Button
+        android:id="@+id/buttonValidate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Valider"
-        android:layout_alignParentBottom="true"/>
+        android:layout_alignParentBottom="true"
+        android:onClick="validateAddClient"/>
 </RelativeLayout>

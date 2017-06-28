@@ -25,4 +25,8 @@
     <string name="main_error_region">Vous devez sélectionner une région</string>
     <string name="main_error_agence">Vous devez sélectionner une agence</string>
     <string name="list_error_no_voiture">Il n\'y a pas de voiture pour cette agence</string>
+    <string name="add_client_assert_nom">Nom obligatoire</string>
+    <string name="add_client_assert_prenom">Prénom obligatoire</string>
+    <string name="add_client_assert_tel">Le téléphone est obligatoire</string>
+    <string name="add_client_assert_mail">Le mail est obiligatoire</string>
 </resources>
