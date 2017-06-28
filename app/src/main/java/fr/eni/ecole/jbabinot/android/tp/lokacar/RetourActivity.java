@@ -35,9 +35,10 @@ public class RetourActivity extends AppCompatActivity {
     private int year, month, day;
     private TextView textViewNom, textViewPrenom;
     NumberFormat numFormat;
-    private TextView textViewMarque, textViewModele, textViewImmat, textViewAnnee, textViewTel;
+    private TextView textViewMarque, textViewModele, textViewImmat, textViewAnnee, textViewTel, textViewDateDebut;
     private EditText editTextKm;
     private Location location;
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +59,7 @@ public class RetourActivity extends AppCompatActivity {
         textViewImmat = (TextView) findViewById(R.id.textViewImmat);
         textViewAnnee = (TextView) findViewById(R.id.textViewAnnee);
         editTextKm = (EditText) findViewById(R.id.editTextKm);
+        textViewDateDebut = (TextView) findViewById(R.id.textViewDateDebut);
 
 
         // ------------ Get intent
@@ -69,6 +71,9 @@ public class RetourActivity extends AppCompatActivity {
 
         // ------------ Affichage des infos du client
         showClient(location.client);
+
+        // ------------ Affichage info location
+        textViewDateDebut.setText(dateFormat.format(location.dateFrom));
 
         // ------------ Initialisation de la date
         calendar = Calendar.getInstance();
@@ -104,12 +109,13 @@ public class RetourActivity extends AppCompatActivity {
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
                 try {
                     if(editTextKm.getText().toString().isEmpty() || Integer.parseInt(editTextKm.getText().toString()) <= location.voiture.km) {
                         Toast.makeText(RetourActivity.this,"Veuillez renseigner le nouveau kilométrage de la voiture.", Toast.LENGTH_SHORT).show();
-                    } else {
-                        LocationDao.endLocation(location.client.id, location.voiture.immatriculation, format.parse(dateView.getText().toString()), Integer.parseInt(editTextKm.getText().toString()));
+                    } else if(dateFormat.parse(dateView.getText().toString()).before(location.dateFrom)) {
+                        Toast.makeText(RetourActivity.this,"La date de fin de location doit être supérieure à la date de début de location.", Toast.LENGTH_SHORT).show();
+                    }else {
+                        LocationDao.endLocation(location.client.id, location.voiture.immatriculation, dateFormat.parse(dateView.getText().toString()), Integer.parseInt(editTextKm.getText().toString()));
                         Intent intent = new Intent();
                         intent.putExtra("refresh", true);
                         setResult(RESULT_OK,intent);
