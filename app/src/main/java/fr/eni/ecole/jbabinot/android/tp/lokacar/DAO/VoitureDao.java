@@ -2,6 +2,7 @@ package fr.eni.ecole.jbabinot.android.tp.lokacar.DAO;
 
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.ecole.jbabinot.android.tp.lokacar.Model.Location;
@@ -45,5 +46,32 @@ public class VoitureDao{
 
      public static List<Voiture> getByAgence(int idAgence){
         return SQLite.select().from(Voiture.class).where(Voiture_Table.agence_id.is(idAgence)).queryList();
+    }
+
+    public static List<Voiture> getListLoue(int agenceId){
+        List<Voiture> listAll = getByAgence(agenceId);
+        List<Location> listLoc = SQLite.select().from(Location.class).where(Location_Table.dateFrom.isNotNull()).and(Location_Table.dateTo.isNull()).queryList();
+        List<Voiture> listLoue = new ArrayList<>();
+        for (int x = 0; x < listAll.size(); x++){
+            for (int y = 0; y < listLoc.size(); y++){
+                if (listAll.get(x).immatriculation.equals(listLoc.get(y).voiture.immatriculation)){
+                    listLoue.add(listAll.get(x));
+                }
+            }
+        }
+        return listLoue;
+    }
+
+    public static List<Voiture> getListDispo(int agenceId){
+        List<Voiture> listAll = getByAgence(agenceId);
+        List<Voiture> listLoue = getListLoue(agenceId);
+//        List<Location> listLoc = SQLite.select().from(Location.class).where(Location_Table.dateFrom.isNotNull()).and(Location_Table.dateTo.isNotNull()).queryList();
+        List<Voiture> listDispo = new ArrayList<>();
+        for (int x = 0; x < listAll.size(); x++){
+            if(!listLoue.contains(listAll.get(x))){
+                listDispo.add(listAll.get(x));
+            }
+        }
+        return listDispo;
     }
 }

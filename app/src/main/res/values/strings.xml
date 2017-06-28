@@ -29,4 +29,6 @@
     <string name="add_client_assert_prenom">Prénom obligatoire</string>
     <string name="add_client_assert_tel">Le téléphone est obligatoire</string>
     <string name="add_client_assert_mail">Le mail est obiligatoire</string>
+    <string name="list_activity_error_not_car_loue">Il n\'y a pas de voitures louées</string>
+    <string name="list_activity_error_car_not_dispo">Il n\'y a plus de véhicule disponible</string>
 </resources>

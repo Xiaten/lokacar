@@ -68,11 +68,41 @@ public class ListActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         switch (id){
+            case R.id.action_filter_loue:
+                getVoituresLoue();
+                break;
+            case R.id.action_filter_dispo:
+                getVoituresDisponible();
+                break;
             case android.R.id.home :
                 onBackPressed();
                 return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void getVoituresLoue(){
+        int agenceId = (int) getIntent().getExtras().get("id");
+        List<Voiture> listVoitureLoue = VoitureDao.getListLoue(agenceId);
+        if (!listVoitureLoue.isEmpty()){
+            adapter = new VoitureAdapter(ListActivity.this, R.layout.list_item, listVoitureLoue);
+            listViewVehicules.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+        }else {
+            Toast.makeText(ListActivity.this, R.string.list_activity_error_not_car_loue, Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void getVoituresDisponible(){
+        int agenceId = (int) getIntent().getExtras().get("id");
+        List<Voiture> listVoitureDispo = VoitureDao.getListDispo(agenceId);
+        if (!listVoitureDispo.isEmpty()){
+            adapter = new VoitureAdapter(ListActivity.this, R.layout.list_item, listVoitureDispo);
+            listViewVehicules.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+        }else {
+            Toast.makeText(ListActivity.this, R.string.list_activity_error_car_not_dispo, Toast.LENGTH_LONG).show();
+        }
     }
 }

@@ -46,4 +46,13 @@ public class Voiture extends BaseModel {
         this.modele = modele;
         this.agence = agence;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Voiture){
+            return this.immatriculation.equals(((Voiture) obj).immatriculation);
+        } else {
+            return false;
+        }
+    }
 }
