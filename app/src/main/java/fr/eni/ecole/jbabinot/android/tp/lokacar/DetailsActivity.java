@@ -12,6 +12,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import fr.eni.ecole.jbabinot.android.tp.lokacar.DAO.LocationDao;
 import fr.eni.ecole.jbabinot.android.tp.lokacar.DAO.PhotoDao;
 import fr.eni.ecole.jbabinot.android.tp.lokacar.DAO.VoitureDao;
 import fr.eni.ecole.jbabinot.android.tp.lokacar.Model.Photo;
@@ -65,6 +66,16 @@ public class DetailsActivity extends AppCompatActivity {
         if(VoitureDao.isLoue(voiture.immatriculation)){
             textViewEtat.setText(R.string.details_state_loue);
             buttonSubmit.setText(R.string.details_button_retour);
+            buttonSubmit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(DetailsActivity.this, RetourActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("location", LocationDao.getByVoiture(voiture.immatriculation));
+                    intent.putExtras(bundle);
+                    startActivityForResult(intent, REQUEST_CODE_REFRESH);
+                }
+            });
         }else{
             textViewEtat.setText(R.string.details_state_dispo);
             buttonSubmit.setText(R.string.details_button_location);

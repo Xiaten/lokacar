@@ -26,9 +26,16 @@ public class LocationDao {
         location.save();
     }
 
-    public static void endLocation (int idClient, String immatriculation, Date date){
+    public static void endLocation (int idClient, String immatriculation, Date date, int km){
         Location location = get(idClient, immatriculation);
         location.dateTo = date;
+        Voiture voiture = location.voiture;
+        voiture.km = km;
+        voiture.save();
         location.save();
+    }
+
+    public static Location getByVoiture(String immatriculation){
+        return SQLite.select().from(Location.class).where(Location_Table.voiture_immatriculation.eq(immatriculation)).and(Location_Table.dateTo.isNull()).querySingle();
     }
 }

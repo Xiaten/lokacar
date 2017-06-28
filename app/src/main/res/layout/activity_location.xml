@@ -142,9 +142,14 @@
             android:layout_height="wrap_content"
             android:text="Changer la date"/>
     </LinearLayout>
-    <Button
-        android:id="@+id/buttonSubmit"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/location_valider"/>
+        android:layout_height="match_parent"
+        android:gravity="bottom">
+        <Button
+            android:id="@+id/buttonSubmit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/location_valider"/>
+    </RelativeLayout>
 </LinearLayout>
