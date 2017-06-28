@@ -32,8 +32,17 @@
                     tools:text="Loué/Dispo"/>
             </RelativeLayout>
         </LinearLayout>
+        <ImageView
+            android:id="@+id/imageViewVoiture"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            tools:src="@drawable/photo_restaurant"
+            android:layout_marginTop="20dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"/>
         <LinearLayout
             style="@style/line_normal"
+            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView

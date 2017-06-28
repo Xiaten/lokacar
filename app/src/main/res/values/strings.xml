@@ -20,7 +20,7 @@
     <string name="add_client_title">Nouveau client</string>
     <string name="details_state_loue">Loué</string>
     <string name="details_state_dispo">Disponible</string>
-    <string name="details_button_retour">Retour</string>
+    <string name="details_button_retour">Retour Véhicule</string>
     <string name="details_button_location">Location</string>
     <string name="main_error_region">Vous devez sélectionner une région</string>
     <string name="main_error_agence">Vous devez sélectionner une agence</string>
