@@ -43,5 +43,9 @@
     <string name="add_client_assert_mail">Le mail est obiligatoire</string>
     <string name="list_activity_error_not_car_loue">Il n\'y a pas de voitures louées</string>
     <string name="list_activity_error_car_not_dispo">Il n\'y a plus de véhicule disponible</string>
-    <string name="retour_telephone">Telephone :</string>
+    <string name="activity_search_title">Recherche</string>
+    <string name="home_app_name">Lokacar</string>
+    <string name="serach_placeholder_modele">Sélectionnez la marque</string>
+    <string name="serach_placeholder_marque">Sélectionnez la marque</string>
+    <string name="retour_telephone">Téléphone :</string>
 </resources>

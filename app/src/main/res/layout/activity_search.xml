@@ -4,6 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="fr.eni.ecole.jbabinot.android.tp.lokacar.SearchActivity">
 
+    <TextView
+        style="@style/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/activity_search_title"
+        android:textAllCaps="true"/>
+
+    <Spinner
+        android:id="@+id/spinnerMarque"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></Spinner>
+
+    <Spinner
+        android:id="@+id/spinnerModele"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></Spinner>
 </LinearLayout>

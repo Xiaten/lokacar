@@ -7,6 +7,7 @@
     tools:context="fr.eni.ecole.jbabinot.android.tp.lokacar.ListActivity"
     android:orientation="vertical">
     <TextView
+        style="@style/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"

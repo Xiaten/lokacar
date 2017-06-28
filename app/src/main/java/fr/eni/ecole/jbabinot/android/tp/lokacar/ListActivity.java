@@ -80,12 +80,20 @@ public class ListActivity extends AppCompatActivity {
             case R.id.action_filter_dispo:
                 getVoituresDisponible();
                 break;
+            case R.id.action_search:
+                getSearch();
+                break;
             case android.R.id.home :
                 onBackPressed();
                 return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void getSearch() {
+        Intent intent = new Intent(ListActivity.this, SearchActivity.class);
+        startActivity(intent);
     }
 
     private void getVoituresLoue(){

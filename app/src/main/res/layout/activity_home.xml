@@ -14,9 +14,10 @@
         android:orientation="horizontal"
         android:gravity="center_vertical">
         <TextView
+            style="@style/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Lokacar"
+            android:text="@string/home_app_name"
             android:textSize="20sp"/>
         <RelativeLayout
             android:layout_width="match_parent"

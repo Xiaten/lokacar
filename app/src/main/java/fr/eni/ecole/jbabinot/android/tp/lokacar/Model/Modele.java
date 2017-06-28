@@ -42,4 +42,9 @@ public class Modele extends BaseModel implements Serializable {
         this.categorie = categorie;
         this.marque = marque;
     }
+
+    @Override
+    public String toString() {
+        return nom;
+    }
 }

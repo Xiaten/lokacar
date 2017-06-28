@@ -27,4 +27,9 @@ public class Marque extends BaseModel implements Serializable {
     public Marque(String nom) {
         this.nom = nom;
     }
+
+    @Override
+    public String toString() {
+        return nom;
+    }
 }
