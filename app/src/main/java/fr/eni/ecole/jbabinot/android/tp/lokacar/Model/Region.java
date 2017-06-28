@@ -5,6 +5,7 @@ import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 import fr.eni.ecole.jbabinot.android.tp.lokacar.AppDatabase;
@@ -14,7 +15,7 @@ import fr.eni.ecole.jbabinot.android.tp.lokacar.AppDatabase;
  */
 
 @Table(database = AppDatabase.class)
-public class Region extends BaseModel {
+public class Region extends BaseModel implements Serializable {
         @Column
         @PrimaryKey(autoincrement = true)
         public int id;
@@ -27,5 +28,14 @@ public class Region extends BaseModel {
 
         public Region(String nom) {
                 this.nom = nom;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+                if(obj instanceof Region){
+                        return this.id == ((Region)obj).id;
+                } else {
+                        return false;
+                }
         }
 }

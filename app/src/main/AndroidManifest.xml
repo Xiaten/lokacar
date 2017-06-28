@@ -23,7 +23,9 @@
         <activity android:name=".AddCarActivity" />
         <activity android:name=".AddClientActivity" />
         <activity android:name=".RentActivity" />
-        <activity android:name=".SearchActivity"></activity>
+        <activity android:name=".LocationActivity"></activity>
+        <activity android:name=".SearchActivity" />
+        <activity android:name=".RetourActivity"></activity>
     </application>
 
 </manifest>

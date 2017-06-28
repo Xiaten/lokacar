@@ -5,6 +5,8 @@ import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
+import java.io.Serializable;
+
 import fr.eni.ecole.jbabinot.android.tp.lokacar.AppDatabase;
 
 /**
@@ -12,7 +14,7 @@ import fr.eni.ecole.jbabinot.android.tp.lokacar.AppDatabase;
  */
 
 @Table(database = AppDatabase.class)
-public class Categorie extends BaseModel {
+public class Categorie extends BaseModel implements Serializable{
     @Column
     @PrimaryKey(autoincrement = true)
     public int id;

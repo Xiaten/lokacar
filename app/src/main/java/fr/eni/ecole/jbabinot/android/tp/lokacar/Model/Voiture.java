@@ -7,13 +7,15 @@ import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 import com.raizlabs.android.dbflow.structure.Model;
 
+import java.io.Serializable;
+
 import fr.eni.ecole.jbabinot.android.tp.lokacar.AppDatabase;
 
 /**
  * Created by jbabinot2015 on 26/06/2017.
  */
 @Table(database = AppDatabase.class)
-public class Voiture extends BaseModel {
+public class Voiture extends BaseModel implements Serializable{
     @Column
     @PrimaryKey
     public String immatriculation;
@@ -49,8 +51,8 @@ public class Voiture extends BaseModel {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof Voiture){
-            return this.immatriculation.equals(((Voiture) obj).immatriculation);
+        if(obj instanceof Voiture){
+            return this.immatriculation.equals(((Voiture)obj).immatriculation);
         } else {
             return false;
         }

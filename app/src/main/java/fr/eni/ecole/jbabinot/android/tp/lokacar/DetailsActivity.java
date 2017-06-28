@@ -3,6 +3,7 @@ package fr.eni.ecole.jbabinot.android.tp.lokacar;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,6 +19,7 @@ import fr.eni.ecole.jbabinot.android.tp.lokacar.Model.Voiture;
 
 public class DetailsActivity extends AppCompatActivity {
 
+    private static final int REQUEST_CODE_REFRESH = 41;
     private TextView textViewMarque;
     private TextView textViewModele;
     private TextView textViewAnnee;
@@ -27,6 +29,8 @@ public class DetailsActivity extends AppCompatActivity {
     private Button buttonSubmit;
     private TextView textViewEtat;
     private ImageView imageViewVoiture;
+
+    Voiture voiture;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +47,12 @@ public class DetailsActivity extends AppCompatActivity {
         textViewEtat = (TextView) findViewById(R.id.textViewEtat);
         imageViewVoiture = (ImageView) findViewById(R.id.imageViewVoiture);
 
+        init();
+    }
+
+    private void init(){
         Intent intent = getIntent();
-        Voiture voiture = VoitureDao.get(intent.getStringExtra("id"));
+        voiture = VoitureDao.get(intent.getStringExtra("id"));
         List<Photo> listPhoto = PhotoDao.getByVoiture(voiture.immatriculation);
         textViewMarque.setText(voiture.modele.marque.nom);
         textViewModele.setText(voiture.modele.nom);
@@ -60,6 +68,31 @@ public class DetailsActivity extends AppCompatActivity {
         }else{
             textViewEtat.setText(R.string.details_state_dispo);
             buttonSubmit.setText(R.string.details_button_location);
+            buttonSubmit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(DetailsActivity.this, LocationActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("voiture",voiture);
+                    intent.putExtras(bundle);
+                    startActivityForResult(intent, REQUEST_CODE_REFRESH);
+                }
+            });
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == REQUEST_CODE_REFRESH){
+            if(resultCode == RESULT_OK){
+                if(data.getBooleanExtra("refresh", false)){
+                    init();
+                    Intent intent = new Intent();
+                    intent.putExtra("refresh", true);
+                    setResult(RESULT_OK, intent);
+                }
+            }
         }
     }
 }

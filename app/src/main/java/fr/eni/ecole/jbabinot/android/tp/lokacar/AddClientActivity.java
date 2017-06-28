@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 
 import fr.eni.ecole.jbabinot.android.tp.lokacar.Model.Client;
@@ -16,7 +17,7 @@ public class AddClientActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_client);
     }
 
-    public void validateAddClient(){
+    public void validateAddClient(View v){
         boolean error = false;
         EditText editTextNom = (EditText) findViewById(R.id.editTextNom);
         EditText editTextPrenom = (EditText) findViewById(R.id.editTextPrenom);

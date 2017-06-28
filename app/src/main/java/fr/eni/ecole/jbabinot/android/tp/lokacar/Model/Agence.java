@@ -7,6 +7,8 @@ import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
+import java.io.Serializable;
+
 import fr.eni.ecole.jbabinot.android.tp.lokacar.AppDatabase;
 
 /**
@@ -14,7 +16,7 @@ import fr.eni.ecole.jbabinot.android.tp.lokacar.AppDatabase;
  */
 
 @Table(database = AppDatabase.class)
-public class Agence extends BaseModel {
+public class Agence extends BaseModel implements Serializable {
     @Column
     @PrimaryKey(autoincrement = true)
     public int id;
@@ -35,5 +37,14 @@ public class Agence extends BaseModel {
     public Agence(String nom, Region region) {
         this.nom = nom;
         this.region = region;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof Agence){
+            return this.id == ((Agence)obj).id;
+        } else {
+            return false;
+        }
     }
 }

@@ -21,34 +21,40 @@ import fr.eni.ecole.jbabinot.android.tp.lokacar.Model.Voiture;
 
 public class ListActivity extends AppCompatActivity {
 
+    private static final int REQUEST_CODE_REFRESH = 41;
     private ListView listViewVehicules;
     private List<Voiture> listVoiture;
     private ArrayAdapter adapter;
+    private int agenceId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
         listViewVehicules = (ListView) findViewById(R.id.listViewVehicules);
-        int agenceId = (int) getIntent().getExtras().get("id");
+        agenceId = (int) getIntent().getExtras().get("id");
         if (agenceId != -1) {
-            listVoiture = VoitureDao.getByAgence(agenceId);
-            if (!listVoiture.isEmpty()){
-                adapter = new VoitureAdapter(ListActivity.this, R.layout.list_item, listVoiture);
-                listViewVehicules.setAdapter(adapter);
-                listViewVehicules.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+            showList(agenceId);
+        }
+    }
+
+    private void showList(int agenceId){
+        listVoiture = VoitureDao.getByAgence(agenceId);
+        if (!listVoiture.isEmpty()){
+            adapter = new VoitureAdapter(ListActivity.this, R.layout.list_item, listVoiture);
+            listViewVehicules.setAdapter(adapter);
+            listViewVehicules.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                     if (adapter.getItem(position) != null) {
                         Intent intent = new Intent(ListActivity.this, DetailsActivity.class);
                         intent.putExtra("id", ((Voiture)adapter.getItem(position)).immatriculation);
-                        startActivity(intent);
+                        startActivityForResult(intent, REQUEST_CODE_REFRESH);
                     }
-                    }
-                });
-            }else {
-                Toast.makeText(ListActivity.this, getString(R.string.list_error_no_voiture), Toast.LENGTH_LONG).show();
-            }
+                }
+            });
+        }else {
+            Toast.makeText(ListActivity.this, getString(R.string.list_error_no_voiture), Toast.LENGTH_LONG).show();
         }
     }
 
@@ -103,6 +109,18 @@ public class ListActivity extends AppCompatActivity {
             adapter.notifyDataSetChanged();
         }else {
             Toast.makeText(ListActivity.this, R.string.list_activity_error_car_not_dispo, Toast.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == REQUEST_CODE_REFRESH){
+            if(resultCode == RESULT_OK){
+                if(data.getBooleanExtra("refresh", false)){
+                    showList(agenceId);
+                }
+            }
         }
     }
 }
