@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
 import java.lang.reflect.Array;
 import java.util.List;
 import java.util.zip.Inflater;
@@ -60,12 +61,19 @@ public class VoitureAdapter extends ArrayAdapter<Voiture> {
 
         Voiture item = (Voiture) getItem(position);
 
-        List<Photo> listPhoto = PhotoDao.getByVoiture(item.immatriculation);
         viewHolder.textViewMarque.setText(item.modele.marque.nom);
         viewHolder.textViewModele.setText(item.modele.nom);
         viewHolder.textViewPrix.setText(String.valueOf(item.prix));
         viewHolder.textViewEtat.setText(VoitureDao.isLoue(item.immatriculation)?"Loué":"Disponible");
-        Picasso.with(contextVoit).load(listPhoto.get(0).chemin).into(viewHolder.imageViewListVoiture);
+
+        List<Photo> listPhoto = PhotoDao.getByVoiture(item.immatriculation);
+        if(listPhoto != null && listPhoto.size()>0) {
+            File file = new File(listPhoto.get(0).chemin);
+//            Picasso.with(contextVoit).load(listPhoto.get(0).chemin).into(viewHolder.imageViewListVoiture);
+            Picasso.with(contextVoit).load(file).into(viewHolder.imageViewListVoiture);
+        } else {
+            Picasso.with(contextVoit).load(contextVoit.getString(R.string.photo_default)).into(viewHolder.imageViewListVoiture);
+        }
 
         return convertView;
     }

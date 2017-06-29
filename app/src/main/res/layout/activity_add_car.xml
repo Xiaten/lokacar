@@ -15,30 +15,58 @@
     <Spinner
         android:id="@+id/spinnerMarque"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></Spinner>
+        android:layout_height="wrap_content"
+        style="@style/line_normal" />
+
     <Spinner
         android:id="@+id/spinnerModele"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></Spinner>
+        android:layout_height="wrap_content"
+        style="@style/line_normal" />
     <EditText
         android:id="@+id/editTextImmatriculation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Immatriculation"/>
+        android:hint="@string/addcar_immat"/>
     <EditText
         android:id="@+id/editTextAnnee"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="number"
-        android:hint="Année"/>
+        android:hint="@string/addcar_annee"/>
     <EditText
         android:id="@+id/editTextKm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="number"
-        android:hint="Kilomètres"/>
-    <Button
+        android:hint="@string/addcar_km"/>
+    <EditText
+        android:id="@+id/editTextPrix"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Enregistrer"/>
+        android:inputType="numberDecimal"
+        android:hint="@string/addcar_prix"/>
+    <Button
+        android:id="@+id/buttonPhoto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/addcar_photo"/>
+    <ImageView
+        android:id="@+id/imageViewPhoto"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom">
+        <Button
+            android:id="@+id/buttonSubmit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/addcar_submit"/>
+    </RelativeLayout>
 </LinearLayout>

@@ -45,7 +45,15 @@
     <string name="list_activity_error_car_not_dispo">Il n\'y a plus de véhicule disponible</string>
     <string name="activity_search_title">Recherche</string>
     <string name="home_app_name">Lokacar</string>
-    <string name="serach_placeholder_modele">Sélectionnez la marque</string>
-    <string name="serach_placeholder_marque">Sélectionnez la marque</string>
+    <string name="search_placeholder_modele">Sélectionnez le modèle</string>
+    <string name="search_placeholder_marque">Sélectionnez la marque</string>
     <string name="retour_telephone">Téléphone :</string>
+    <string name="addcar_immat">Immatriculation</string>
+    <string name="addcar_annee">Année</string>
+    <string name="addcar_km">Kilomètres</string>
+    <string name="addcar_prix">Prix</string>
+    <string name="addcar_submit">Enregistrer</string>
+    <string name="addcar_km_default">0</string>
+    <string name="addcar_photo">Ajouter photo</string>
+    <string name="photo_default">http://icons.iconarchive.com/icons/elegantthemes/beautiful-flat-one-color/128/car-icon.png</string>
 </resources>

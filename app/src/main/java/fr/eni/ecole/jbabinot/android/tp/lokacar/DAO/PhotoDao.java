@@ -17,4 +17,9 @@ public class PhotoDao {
     public static List<Photo> getByVoiture(String voitureId){
         return SQLite.select().from(Photo.class).where(Photo_Table.voiture_immatriculation.is(voitureId)).queryList();
     }
+
+    public static void addPhoto(Voiture voiture, String imagePath){
+        Photo photo = new Photo(imagePath, voiture);
+        photo.save();
+    }
 }

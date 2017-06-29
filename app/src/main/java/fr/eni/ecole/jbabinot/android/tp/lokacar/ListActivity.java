@@ -1,6 +1,7 @@
 package fr.eni.ecole.jbabinot.android.tp.lokacar;
 
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -18,6 +19,7 @@ import java.util.List;
 
 import fr.eni.ecole.jbabinot.android.tp.lokacar.DAO.VoitureDao;
 import fr.eni.ecole.jbabinot.android.tp.lokacar.Model.Voiture;
+import fr.eni.ecole.jbabinot.android.tp.lokacar.Util.Preference;
 
 public class ListActivity extends AppCompatActivity {
 
@@ -26,16 +28,26 @@ public class ListActivity extends AppCompatActivity {
     private List<Voiture> listVoiture;
     private ArrayAdapter adapter;
     private int agenceId;
+    private FloatingActionButton fabAdd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
         listViewVehicules = (ListView) findViewById(R.id.listViewVehicules);
-        agenceId = (int) getIntent().getExtras().get("id");
+        fabAdd = (FloatingActionButton) findViewById(R.id.fabAdd);
+        agenceId = Preference.getIdAgence(ListActivity.this);
+//        agenceId = (int) getIntent().getExtras().get("id");
         if (agenceId != -1) {
             showList(agenceId);
         }
+        fabAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ListActivity.this, AddCarActivity.class);
+                startActivityForResult(intent, REQUEST_CODE_REFRESH);
+            }
+        });
     }
 
     private void showList(int agenceId){

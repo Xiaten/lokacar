@@ -74,4 +74,8 @@ public class VoitureDao{
         }
         return listDispo;
     }
+
+    public static void add(Voiture voiture){
+        voiture.save();
+    }
 }

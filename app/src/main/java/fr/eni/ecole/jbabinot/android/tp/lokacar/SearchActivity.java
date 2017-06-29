@@ -11,6 +11,7 @@ import com.raizlabs.android.dbflow.sql.language.SQLite;
 
 import java.util.List;
 
+import fr.eni.ecole.jbabinot.android.tp.lokacar.DAO.MarqueDao;
 import fr.eni.ecole.jbabinot.android.tp.lokacar.DAO.ModeleDao;
 import fr.eni.ecole.jbabinot.android.tp.lokacar.Model.Agence;
 import fr.eni.ecole.jbabinot.android.tp.lokacar.Model.Marque;
@@ -38,12 +39,12 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     public void listMarque(){
-        listMarque = SQLite.select().from(Marque.class).orderBy(Marque_Table.nom, true).queryList();
+        listMarque = MarqueDao.getAll();
         spinnerMarque = (Spinner) findViewById(R.id.spinnerMarque);
 
         HintSpinner<Marque> hintSpinnerMarque = new HintSpinner<>(
             spinnerMarque,
-            new HintAdapter<>(SearchActivity.this, R.string.serach_placeholder_marque, listMarque),
+            new HintAdapter<>(SearchActivity.this, R.string.search_placeholder_marque, listMarque),
             new HintSpinner.Callback<Marque>() {
                 @Override
                 public void onItemSelected(int position, final Marque itemAtPosition) {
@@ -54,7 +55,7 @@ public class SearchActivity extends AppCompatActivity {
 
                     HintSpinner<Modele> hintSpinnerModele = new HintSpinner<>(
                         spinnerModele,
-                        new HintAdapter<>(SearchActivity.this, R.string.serach_placeholder_modele, listModele),
+                        new HintAdapter<>(SearchActivity.this, R.string.search_placeholder_modele, listModele),
                         new HintSpinner.Callback<Modele>() {
                             @Override
                             public void onItemSelected(int position2, Modele itemAtPosition2) {

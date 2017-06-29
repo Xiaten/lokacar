@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
 import java.util.List;
 
 import fr.eni.ecole.jbabinot.android.tp.lokacar.DAO.LocationDao;
@@ -61,8 +62,15 @@ public class DetailsActivity extends AppCompatActivity {
         textViewKm.setText(String.valueOf(voiture.km));
         textViewPrix.setText(String.valueOf(voiture.prix));
         textViewImmatriculation.setText(voiture.immatriculation);
-        Picasso.with(DetailsActivity.this).load(listPhoto.get(0).chemin).into(imageViewVoiture);
-
+//        Picasso.with(DetailsActivity.this).load(listPhoto.get(0).chemin).into(imageViewVoiture);
+        if(listPhoto != null && listPhoto.size()>0) {
+            File file = new File(listPhoto.get(0).chemin);
+//            Picasso.with(contextVoit).load(listPhoto.get(0).chemin).into(viewHolder.imageViewListVoiture);
+            Picasso.with(DetailsActivity.this).load(file).into(imageViewVoiture);
+        } else {
+            Picasso.with(DetailsActivity.this).load(getString(R.string.photo_default)).into(imageViewVoiture);
+        }
+        
         if(VoitureDao.isLoue(voiture.immatriculation)){
             textViewEtat.setText(R.string.details_state_loue);
             buttonSubmit.setText(R.string.details_button_retour);
