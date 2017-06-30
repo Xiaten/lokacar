@@ -1,5 +1,6 @@
 package fr.eni.ecole.jbabinot.android.tp.lokacar;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -117,16 +118,16 @@ public class SearchActivity extends AppCompatActivity {
             Toast.makeText(SearchActivity.this, getString(R.string.search_error_nothing_selected), Toast.LENGTH_LONG).show();
             error = true;
         }
-        if (idMarqueSelected !=0 && idModeleSelected == 0 && idCategorieSelected == 0 && editTextPrice == null){
+        if (idMarqueSelected !=0 && idModeleSelected == 0 && idCategorieSelected == 0 && editTextPrice.getText().toString().isEmpty()){
             whatList = Constant.IS_MARQUE;
             whatId = idMarqueSelected;
-        } else if (idMarqueSelected !=0 && idModeleSelected != 0 && idCategorieSelected == 0 && editTextPrice == null){
+        } else if (idMarqueSelected !=0 && idModeleSelected != 0 && idCategorieSelected == 0 && editTextPrice.getText().toString().isEmpty()){
             whatList = Constant.IS_MODELE;
             whatId = idModeleSelected;
-        } else if (idMarqueSelected == 0 && idModeleSelected == 0 && idCategorieSelected != 0 && editTextPrice == null){
+        } else if (idMarqueSelected == 0 && idModeleSelected == 0 && idCategorieSelected != 0 && editTextPrice.getText().toString().isEmpty()){
             whatList = Constant.IS_CATEGORY;
             whatId = idCategorieSelected;
-        } else  if (idMarqueSelected == 0 && idModeleSelected == 0 && idCategorieSelected == 0 && editTextPrice != null && Integer.parseInt(String.valueOf(editTextPrice.getText())) != 0){
+        } else  if (idMarqueSelected == 0 && idModeleSelected == 0 && idCategorieSelected == 0 && !editTextPrice.getText().toString().isEmpty() && Integer.parseInt(String.valueOf(editTextPrice.getText())) != 0){
             whatList = Constant.IS_PRICE;
             whatId = Integer.parseInt(String.valueOf(editTextPrice.getText()));
         }
