@@ -111,9 +111,9 @@ public class RetourActivity extends AppCompatActivity {
             public void onClick(View view) {
                 try {
                     if(editTextKm.getText().toString().isEmpty() || Integer.parseInt(editTextKm.getText().toString()) <= location.voiture.km) {
-                        Toast.makeText(RetourActivity.this,"Veuillez renseigner le nouveau kilométrage de la voiture.", Toast.LENGTH_SHORT).show();
+                        editTextKm.setError("Veuillez renseigner le nouveau kilométrage de la voiture.");
                     } else if(dateFormat.parse(dateView.getText().toString()).before(location.dateFrom)) {
-                        Toast.makeText(RetourActivity.this,"La date de fin de location doit être supérieure à la date de début de location.", Toast.LENGTH_SHORT).show();
+                        dateView.setError("La date de fin de location doit être supérieure à la date de début de location.");
                     }else {
                         LocationDao.endLocation(location.client.id, location.voiture.immatriculation, dateFormat.parse(dateView.getText().toString()), Integer.parseInt(editTextKm.getText().toString()));
                         Intent intent = new Intent();

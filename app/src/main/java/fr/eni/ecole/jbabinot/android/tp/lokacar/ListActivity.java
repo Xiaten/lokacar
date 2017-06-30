@@ -1,6 +1,7 @@
 package fr.eni.ecole.jbabinot.android.tp.lokacar;
 
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -16,6 +17,7 @@ import java.util.List;
 import fr.eni.ecole.jbabinot.android.tp.lokacar.DAO.VoitureDao;
 import fr.eni.ecole.jbabinot.android.tp.lokacar.Model.Voiture;
 import fr.eni.ecole.jbabinot.android.tp.lokacar.Util.Constant;
+import fr.eni.ecole.jbabinot.android.tp.lokacar.Util.Preference;
 
 public class ListActivity extends AppCompatActivity {
 
@@ -26,18 +28,28 @@ public class ListActivity extends AppCompatActivity {
     private ArrayAdapter adapter;
     private int agenceId;
     private String messageError = "";
+    private FloatingActionButton fabAdd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
         listViewVehicules = (ListView) findViewById(R.id.listViewVehicules);
-        agenceId = (int) getIntent().getExtras().get("id");
+        fabAdd = (FloatingActionButton) findViewById(R.id.fabAdd);
+        agenceId = Preference.getIdAgence(ListActivity.this);
+//        agenceId = (int) getIntent().getExtras().get("id");
         if (agenceId != -1) {
             listVoiture = VoitureDao.getByAgence(agenceId);
             messageError = getString(R.string.list_error_no_voiture);
             showList(listVoiture, messageError);
         }
+        fabAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ListActivity.this, AddCarActivity.class);
+                startActivityForResult(intent, REQUEST_CODE_REFRESH);
+            }
+        });
     }
 
     private void showList(List<Voiture> listVoiture, String messageError){
@@ -47,11 +59,11 @@ public class ListActivity extends AppCompatActivity {
             listViewVehicules.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                if (adapter.getItem(position) != null) {
-                    Intent intent = new Intent(ListActivity.this, DetailsActivity.class);
-                    intent.putExtra("id", ((Voiture)adapter.getItem(position)).immatriculation);
-                    startActivityForResult(intent, REQUEST_CODE_REFRESH);
-                }
+                    if (adapter.getItem(position) != null) {
+                        Intent intent = new Intent(ListActivity.this, DetailsActivity.class);
+                        intent.putExtra("id", ((Voiture)adapter.getItem(position)).immatriculation);
+                        startActivityForResult(intent, REQUEST_CODE_REFRESH);
+                    }
                 }
             });
         }else {

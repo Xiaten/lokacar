@@ -1,6 +1,5 @@
 package fr.eni.ecole.jbabinot.android.tp.lokacar.DAO;
 
-import com.raizlabs.android.dbflow.sql.SQLiteType;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 
 import java.util.ArrayList;
@@ -76,6 +75,10 @@ public class VoitureDao{
             }
         }
         return listDispo;
+    }
+
+    public static void add(Voiture voiture){
+        voiture.save();
     }
 
     public static List<Voiture> getListPrice(){
