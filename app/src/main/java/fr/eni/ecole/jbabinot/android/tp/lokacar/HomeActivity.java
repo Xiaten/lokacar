@@ -17,6 +17,7 @@ import java.util.List;
 
 import fr.eni.ecole.jbabinot.android.tp.lokacar.DAO.AgenceDao;
 import fr.eni.ecole.jbabinot.android.tp.lokacar.DAO.DaoUtil;
+import fr.eni.ecole.jbabinot.android.tp.lokacar.DAO.RegionDao;
 import fr.eni.ecole.jbabinot.android.tp.lokacar.Model.Agence;
 import fr.eni.ecole.jbabinot.android.tp.lokacar.Model.Categorie;
 import fr.eni.ecole.jbabinot.android.tp.lokacar.Model.Client;
@@ -48,7 +49,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void listRegion(){
-        final List<Region> listRegion = SQLite.select().from(Region.class).orderBy(Region_Table.nom, true).queryList();
+        final List<Region> listRegion = RegionDao.getAll();
         spinnerRegion = (Spinner) findViewById(R.id.spinnerRegion);
         adapterRegion = new RegionAdapter(HomeActivity.this, R.layout.item_region, listRegion);
         adapterRegion.setDropDownViewResource(R.layout.item_region);

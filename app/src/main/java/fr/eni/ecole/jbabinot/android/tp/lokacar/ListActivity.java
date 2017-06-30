@@ -11,21 +11,21 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.raizlabs.android.dbflow.sql.language.SQLite;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.ecole.jbabinot.android.tp.lokacar.DAO.VoitureDao;
 import fr.eni.ecole.jbabinot.android.tp.lokacar.Model.Voiture;
+import fr.eni.ecole.jbabinot.android.tp.lokacar.Util.Constant;
 
 public class ListActivity extends AppCompatActivity {
 
     private static final int REQUEST_CODE_REFRESH = 41;
+    private static final int REQUEST_CODE_SEARCH= 22;
     private ListView listViewVehicules;
     private List<Voiture> listVoiture;
     private ArrayAdapter adapter;
     private int agenceId;
+    private String messageError = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,27 +34,28 @@ public class ListActivity extends AppCompatActivity {
         listViewVehicules = (ListView) findViewById(R.id.listViewVehicules);
         agenceId = (int) getIntent().getExtras().get("id");
         if (agenceId != -1) {
-            showList(agenceId);
+            listVoiture = VoitureDao.getByAgence(agenceId);
+            messageError = getString(R.string.list_error_no_voiture);
+            showList(listVoiture, messageError);
         }
     }
 
-    private void showList(int agenceId){
-        listVoiture = VoitureDao.getByAgence(agenceId);
+    private void showList(List<Voiture> listVoiture, String messageError){
         if (!listVoiture.isEmpty()){
             adapter = new VoitureAdapter(ListActivity.this, R.layout.list_item, listVoiture);
             listViewVehicules.setAdapter(adapter);
             listViewVehicules.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                    if (adapter.getItem(position) != null) {
-                        Intent intent = new Intent(ListActivity.this, DetailsActivity.class);
-                        intent.putExtra("id", ((Voiture)adapter.getItem(position)).immatriculation);
-                        startActivityForResult(intent, REQUEST_CODE_REFRESH);
-                    }
+                if (adapter.getItem(position) != null) {
+                    Intent intent = new Intent(ListActivity.this, DetailsActivity.class);
+                    intent.putExtra("id", ((Voiture)adapter.getItem(position)).immatriculation);
+                    startActivityForResult(intent, REQUEST_CODE_REFRESH);
+                }
                 }
             });
         }else {
-            Toast.makeText(ListActivity.this, getString(R.string.list_error_no_voiture), Toast.LENGTH_LONG).show();
+            Toast.makeText(ListActivity.this, messageError, Toast.LENGTH_LONG).show();
         }
     }
 
@@ -93,7 +94,7 @@ public class ListActivity extends AppCompatActivity {
 
     private void getSearch() {
         Intent intent = new Intent(ListActivity.this, SearchActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent, REQUEST_CODE_SEARCH);
     }
 
     private void getVoituresLoue(){
@@ -123,10 +124,32 @@ public class ListActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == REQUEST_CODE_REFRESH){
-            if(resultCode == RESULT_OK){
-                if(data.getBooleanExtra("refresh", false)){
-                    showList(agenceId);
+        if(resultCode == RESULT_OK) {
+            if (requestCode == REQUEST_CODE_REFRESH) {
+                if (data.getBooleanExtra("refresh", false)) {
+                    listVoiture = VoitureDao.getByAgence(agenceId);
+                    messageError = getString(R.string.list_error_no_voiture);
+                    showList(listVoiture, messageError);
+                }
+            } else if (requestCode == REQUEST_CODE_SEARCH) {
+                messageError = getString(R.string.search_error_not_car);
+                switch (data.getStringExtra("whatList")){
+                    case Constant.IS_MARQUE:
+                        listVoiture = VoitureDao.getListByMarque(data.getIntExtra("whatId", 0), data.getIntExtra("id", 0));
+                        showList(listVoiture, messageError);
+                        break;
+                    case Constant.IS_MODELE:
+                        listVoiture = VoitureDao.getListByMarqueAndModele(data.getIntExtra("whatId", 0), data.getIntExtra("id", 0));
+                        showList(listVoiture, messageError);
+                        break;
+                    case Constant.IS_CATEGORY:
+                        listVoiture = VoitureDao.getListByCategorie(data.getIntExtra("whatId", 0), data.getIntExtra("id", 0));
+                        showList(listVoiture, messageError);
+                        break;
+                    case Constant.IS_PRICE:
+                        listVoiture = VoitureDao.getListByPrice(data.getIntExtra("whatId", 0), data.getIntExtra("id", 0));
+                        showList(listVoiture, messageError);
+                        break;
                 }
             }
         }

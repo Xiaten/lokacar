@@ -47,4 +47,13 @@ public class Modele extends BaseModel implements Serializable {
     public String toString() {
         return nom;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof Modele){
+            return this.id == ((Modele) obj).id;
+        } else {
+            return false;
+        }
+    }
 }

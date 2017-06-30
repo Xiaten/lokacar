@@ -28,4 +28,9 @@ public class Categorie extends BaseModel implements Serializable{
     public Categorie(String nom) {
         this.nom = nom;
     }
+
+    @Override
+    public String toString() {
+        return nom;
+    }
 }

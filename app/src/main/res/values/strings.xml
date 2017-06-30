@@ -48,4 +48,12 @@
     <string name="serach_placeholder_modele">Sélectionnez la marque</string>
     <string name="serach_placeholder_marque">Sélectionnez la marque</string>
     <string name="retour_telephone">Téléphone :</string>
+    <string name="activity_search_where">ou</string>
+    <string name="search_placeholder_categorie">Sélectionnez la catégorie</string>
+    <string name="activity_search_price">prix</string>
+    <string name="search_placeholder_price">Sélectionnez le prix</string>
+    <string name="activity_search_validate">Valider</string>
+    <string name="search_error_not_car">Il n\'y a pas de voitures qui correspondent à votre recherche</string>
+    <string name="search_error_nothing_selected">Vous devez au moins renseigner une liste</string>
+    <string name="activity_search_placeholder_price">Saissisez le prix</string>
 </resources>
