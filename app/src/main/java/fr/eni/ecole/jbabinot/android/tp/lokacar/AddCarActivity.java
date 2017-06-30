@@ -34,7 +34,7 @@ import fr.eni.ecole.jbabinot.android.tp.lokacar.Util.Preference;
 import me.srodrigo.androidhintspinner.HintAdapter;
 import me.srodrigo.androidhintspinner.HintSpinner;
 
-public class AddCarActivity extends AppCompatActivity {
+public class AddCarActivity extends AppActivity {
 
     private static final int REQUEST_IMAGE_CAPTURE = 60;
     private static final int REQUEST_TAKE_PHOTO = 63;
@@ -145,4 +145,5 @@ public class AddCarActivity extends AppCompatActivity {
             imageViewPhoto.setImageBitmap(image);
         }
     }
+
 }

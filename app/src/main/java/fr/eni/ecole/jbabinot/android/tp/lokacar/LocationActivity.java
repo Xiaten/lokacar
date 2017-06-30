@@ -24,7 +24,7 @@ import fr.eni.ecole.jbabinot.android.tp.lokacar.DAO.LocationDao;
 import fr.eni.ecole.jbabinot.android.tp.lokacar.Model.Client;
 import fr.eni.ecole.jbabinot.android.tp.lokacar.Model.Voiture;
 
-public class LocationActivity extends AppCompatActivity {
+public class LocationActivity extends AppActivity {
 
     private static final int REQUEST_CODE = 42;
     private DatePickerDialog datePicker;

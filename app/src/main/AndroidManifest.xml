@@ -36,7 +36,6 @@
         <activity android:name=".DetailsActivity" />
         <activity android:name=".AddCarActivity" />
         <activity android:name=".AddClientActivity" />
-        <activity android:name=".RentActivity" />
         <activity android:name=".LocationActivity"></activity>
         <activity android:name=".SearchActivity" />
         <activity android:name=".RetourActivity"></activity>

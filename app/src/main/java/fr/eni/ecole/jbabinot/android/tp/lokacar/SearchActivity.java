@@ -3,6 +3,8 @@ package fr.eni.ecole.jbabinot.android.tp.lokacar;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -29,7 +31,7 @@ import me.srodrigo.androidhintspinner.HintSpinner;
 
 import static fr.eni.ecole.jbabinot.android.tp.lokacar.R.id.spinnerAgence;
 
-public class SearchActivity extends AppCompatActivity {
+public class SearchActivity extends AppActivity {
 
     private Spinner spinnerMarque;
     private Spinner spinnerModele;
@@ -142,5 +144,31 @@ public class SearchActivity extends AppCompatActivity {
         }else {
             Toast.makeText(SearchActivity.this, getString(R.string.search_error_not_car), Toast.LENGTH_LONG).show();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_other, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        switch (id){
+            case R.id.action_home:
+                Intent intent = new Intent(SearchActivity.this, ListActivity.class);
+                intent.putExtra("id", idAgence);
+                startActivity(intent);
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -19,7 +20,7 @@ import fr.eni.ecole.jbabinot.android.tp.lokacar.Model.Voiture;
 import fr.eni.ecole.jbabinot.android.tp.lokacar.Util.Constant;
 import fr.eni.ecole.jbabinot.android.tp.lokacar.Util.Preference;
 
-public class ListActivity extends AppCompatActivity {
+public class ListActivity extends AppActivity {
 
     private static final int REQUEST_CODE_REFRESH = 41;
     private static final int REQUEST_CODE_SEARCH= 22;
@@ -29,19 +30,22 @@ public class ListActivity extends AppCompatActivity {
     private int agenceId;
     private String messageError = "";
     private FloatingActionButton fabAdd;
+    private TextView textViewFiltre;
+    private boolean isSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
         listViewVehicules = (ListView) findViewById(R.id.listViewVehicules);
+        textViewFiltre = (TextView) findViewById(R.id.textViewFiltre);
         fabAdd = (FloatingActionButton) findViewById(R.id.fabAdd);
         agenceId = Preference.getIdAgence(ListActivity.this);
 //        agenceId = (int) getIntent().getExtras().get("id");
         if (agenceId != -1) {
             listVoiture = VoitureDao.getByAgence(agenceId);
             messageError = getString(R.string.list_error_no_voiture);
-            showList(listVoiture, messageError);
+            showList(listVoiture, messageError, "");
         }
         fabAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,8 +56,13 @@ public class ListActivity extends AppCompatActivity {
         });
     }
 
-    private void showList(List<Voiture> listVoiture, String messageError){
+    private void showList(List<Voiture> listVoiture, String messageError, String filtre){
         if (!listVoiture.isEmpty()){
+            if (!filtre.isEmpty()){
+                textViewFiltre.setText(filtre);
+            } else {
+                textViewFiltre.setText("");
+            }
             adapter = new VoitureAdapter(ListActivity.this, R.layout.list_item, listVoiture);
             listViewVehicules.setAdapter(adapter);
             listViewVehicules.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -75,6 +84,12 @@ public class ListActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_list, menu);
+        if (isSearch){
+            isSearch = false;
+            menu.findItem(R.id.action_home).setVisible(true);
+        }else{
+            menu.findItem(R.id.action_home).setVisible(false);
+        }
         return true;
     }
 
@@ -87,6 +102,12 @@ public class ListActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         switch (id){
+            case R.id.action_home:
+                listVoiture = VoitureDao.getByAgence(agenceId);
+                messageError = getString(R.string.list_error_no_voiture);
+                showList(listVoiture, messageError, "");
+                invalidateOptionsMenu();
+                break;
             case R.id.action_filter_loue:
                 getVoituresLoue();
                 break;
@@ -141,28 +162,30 @@ public class ListActivity extends AppCompatActivity {
                 if (data.getBooleanExtra("refresh", false)) {
                     listVoiture = VoitureDao.getByAgence(agenceId);
                     messageError = getString(R.string.list_error_no_voiture);
-                    showList(listVoiture, messageError);
+                    showList(listVoiture, messageError,"");
                 }
             } else if (requestCode == REQUEST_CODE_SEARCH) {
                 messageError = getString(R.string.search_error_not_car);
                 switch (data.getStringExtra("whatList")){
                     case Constant.IS_MARQUE:
                         listVoiture = VoitureDao.getListByMarque(data.getIntExtra("whatId", 0), data.getIntExtra("id", 0));
-                        showList(listVoiture, messageError);
+                        showList(listVoiture, messageError, "par "+ Constant.IS_MARQUE);
                         break;
                     case Constant.IS_MODELE:
                         listVoiture = VoitureDao.getListByMarqueAndModele(data.getIntExtra("whatId", 0), data.getIntExtra("id", 0));
-                        showList(listVoiture, messageError);
+                        showList(listVoiture, messageError, "par "+ Constant.IS_MODELE);
                         break;
                     case Constant.IS_CATEGORY:
                         listVoiture = VoitureDao.getListByCategorie(data.getIntExtra("whatId", 0), data.getIntExtra("id", 0));
-                        showList(listVoiture, messageError);
+                        showList(listVoiture, messageError, "par "+ Constant.IS_CATEGORY);
                         break;
                     case Constant.IS_PRICE:
                         listVoiture = VoitureDao.getListByPrice(data.getIntExtra("whatId", 0), data.getIntExtra("id", 0));
-                        showList(listVoiture, messageError);
+                        showList(listVoiture, messageError, "par "+ Constant.IS_PRICE);
                         break;
                 }
+                isSearch = true;
+                invalidateOptionsMenu();
             }
         }
     }

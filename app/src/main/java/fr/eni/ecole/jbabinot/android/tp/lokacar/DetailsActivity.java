@@ -19,7 +19,7 @@ import fr.eni.ecole.jbabinot.android.tp.lokacar.DAO.VoitureDao;
 import fr.eni.ecole.jbabinot.android.tp.lokacar.Model.Photo;
 import fr.eni.ecole.jbabinot.android.tp.lokacar.Model.Voiture;
 
-public class DetailsActivity extends AppCompatActivity {
+public class DetailsActivity extends AppActivity {
 
     private static final int REQUEST_CODE_REFRESH = 41;
     private TextView textViewMarque;

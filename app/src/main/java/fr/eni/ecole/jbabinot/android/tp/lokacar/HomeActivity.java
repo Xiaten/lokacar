@@ -29,7 +29,7 @@ import fr.eni.ecole.jbabinot.android.tp.lokacar.Model.Region_Table;
 import fr.eni.ecole.jbabinot.android.tp.lokacar.Model.Voiture;
 import fr.eni.ecole.jbabinot.android.tp.lokacar.Util.Preference;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppActivity {
 
     private ArrayAdapter adapterRegion;
     private ArrayAdapter adapterAgence;

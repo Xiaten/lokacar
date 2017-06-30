@@ -25,7 +25,7 @@ import fr.eni.ecole.jbabinot.android.tp.lokacar.Model.Client;
 import fr.eni.ecole.jbabinot.android.tp.lokacar.Model.Location;
 import fr.eni.ecole.jbabinot.android.tp.lokacar.Model.Voiture;
 
-public class RetourActivity extends AppCompatActivity {
+public class RetourActivity extends AppActivity {
     private static final int REQUEST_CODE = 42;
     private DatePickerDialog datePicker;
     private Calendar calendar;

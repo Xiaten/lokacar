@@ -9,7 +9,7 @@ import android.widget.EditText;
 
 import fr.eni.ecole.jbabinot.android.tp.lokacar.Model.Client;
 
-public class AddClientActivity extends AppCompatActivity {
+public class AddClientActivity extends AppActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
